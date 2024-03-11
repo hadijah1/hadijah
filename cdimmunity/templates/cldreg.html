@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>Parent and Child Registration</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style2.css' %}"
+    />
+  </head>
+  <body class="light-mode" style="background-image: url('https://wallpaperaccess.com/full/2348995.jpg'); background-size: cover; ">
+    <div class="content-container">
+      <h1 style="color: blue;">Parent and Child Registration</h1>
+      <h2 style="color: rgb(175, 160, 160);">
+        <em
+          >date format eg
+          <span style="size: 1cqb; color: rgb(236, 14, 81)">"1990-12-09"</span></em
+        >
+      </h2>
+      <h1>
+        <em
+          ><span style="color: rgb(243, 227, 10)"
+            >"and you cannot use an existing email choose your own email or
+            another email"</span
+          ></em
+        >
+      </h1>
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Register</button>
+      </form>
+      <br />
+      <div style="text-align: center">
+        <form action="{% url 'home' %}" method="get">
+          <button type="submit" class="btn btn-primary">
+            Cancel this registration
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

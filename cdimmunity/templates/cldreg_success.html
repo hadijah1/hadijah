@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<H1>VERY WELL, Child is registered</H1><br>
+  <form action="{% url 'home' %}" method="get">
+    <button type="submit" class="btn btn-primary">GO TO DASHBOARD</button>
+  </form> 
+{% endblock %}
+

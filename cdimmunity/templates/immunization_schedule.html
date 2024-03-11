@@ -1,0 +1,100 @@
+{% extends 'base.html' %} {% block title %} Immunization Schedule {% endblock %}
+{% block content %}
+<div
+  style="
+    background-image: linear-gradient(to bottom, #87cefa, #add8e6);
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+  "
+>
+  <h1 style="text-align: center; color: #fff">Immunization Schedule</h1>
+  <form
+    method="post"
+    enctype="multipart/form-data"
+    style="
+      background-color: rgba(0, 123, 255, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    "
+  >
+    {% csrf_token %}
+    <div style="margin-bottom: 10px">
+      {{ form.vaccine_name.label_tag }}<br />
+      {{ form.vaccine_name }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.recommended_age.label_tag }}<br />
+      {{ form.recommended_age }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.number_of_doses.label_tag }}<br />
+      {{ form.number_of_doses }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.additional_info.label_tag }}<br />
+      {{ form.additional_info }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.child_name.label_tag }}<br />
+      {{ form.child_name }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.child_image.label_tag }}<br />
+      {{ form.child_image }}
+    </div>
+    <button
+      type="submit"
+      style="
+        background-color: #3b5998;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      "
+    >
+      Submit
+    </button>
+  </form>
+  <br />
+  <div style="text-align: center">
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button
+        type="submit"
+        class="btn btn-primary"
+        style="
+          background-color: #3b5998;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+        "
+      >
+        Logout
+      </button>
+    </form>
+    <br />
+    <form method="post" action="{% url 'home' %}">
+      {% csrf_token %}
+      <button
+        type="submit"
+        class="btn btn-primary"
+        style="
+          background-color: #3b5998;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+        "
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

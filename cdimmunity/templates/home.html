@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="background-image: linear-gradient(to bottom, #87CEFA, #ADD8E6); padding: 20px; border-radius: 10px;">
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            {% if user.profile_picture %}
+                <img src="{{ user.profile_picture.url }}" alt="Profile Picture" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
+            {% else %}
+                <img src="default_profile_picture.png" alt="Default Profile Picture" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
+            {% endif %}
+            <h2>Welcome, <em style="color: aqua;">{{ user.username }}</em></h2>
+        </div>
+        <h1 style="text-align: center; color: #fff;">Family Information</h1>
+        
+        <table style="width: 100%; color: rgb(78, 78, 233); border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr style="background-color: #4CAF50; color: white;">
+                    <th style="padding: 10px;">Email</th>
+                    <th style="padding: 10px;">First Name</th>
+                    <th style="padding: 10px;">Country</th>
+                    <th style="padding: 10px;">Occupation</th>
+                    <th style="padding: 10px;">Relationship</th>
+                    <th style="padding: 10px;">Date Joined</th>
+                    <th style="padding: 10px;">Child Name</th>
+                    <th style="padding: 10px;">Child Date of Birth</th>
+                    <th style="padding: 10px;">Child Gender</th>
+                    <th style="padding: 10px;">Child Place of Birth</th>
+                    <th style="padding: 10px;">Child Blood Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for family in families %}
+                    <tr style="background-color: rgb(169, 226, 207);">
+                        <td style="padding: 10px;">{{ family.email }}</td>
+                        <td style="padding: 10px;">{{ family.first_name }}</td>
+                        <td style="padding: 10px;">{{ family.country }}</td>
+                        <td style="padding: 10px;">{{ family.occupation }}</td>
+                        <td style="padding: 10px;">{{ family.relationship }}</td>
+                        <td style="padding: 10px;">{{ family.date_joined }}</td>
+                        <td style="padding: 10px;">{{ family.child_name }}</td>
+                        <td style="padding: 10px;">{{ family.child_date_of_birth }}</td>
+                        <td style="padding: 10px;">{{ family.child_gender }}</td>
+                        <td style="padding: 10px;">{{ family.child_place_of_birth }}</td>
+                        <td style="padding: 10px;">{{ family.child_blood_type }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="text-align: center;">
+            <br><br>
+            <form action="{% url 'cldreg' %}" method="get">
+                <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Dear <em style="color: blue; text-decoration: dashed;">{{ user.username }}</em>, please Register your child here 🈁</button>
+            </form>
+            <br />
+            <form method="get" action="{% url 'immunization_schedule' %}">
+                <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Fill in the immunization_schedule.💉</button>
+            </form><br />
+            <br>
+            <form method="post" action="{% url 'view_schedule' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">See the immunization schedule</button>
+            </form>
+            <br>
+            <form method="get" action="{% url 'remind' %}">
+                <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Update reminder settings</button>
+            </form><br>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Logout</button>
+            </form><br>
+        </div>
+    </div>
+{% endblock %}

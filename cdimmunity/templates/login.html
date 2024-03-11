@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block title %} Login - My Website {% endblock %} {% block content %}
+<div class="form-container">
+  <h2>Login</h2>
+  {% if request.GET.next %}
+  <p>Please log in to access <strong>{{ request.GET.next }}</strong>.</p>
+  {% endif %} {% if form.non_field_errors %}
+  <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+  {% endif %}
+  <form
+    method="post"
+    style="
+      background-color: rgba(0, 123, 255, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    "
+  >
+    {% csrf_token %}
+    <div style="margin-bottom: 10px">
+      {{ form.email.label_tag }}<br />
+      {{ form.email }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.password.label_tag }}<br />
+      {{ form.password }}
+    </div>
+    <button
+      type="submit"
+      style="
+        background-color: #fff;
+        color: #007bff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+      "
+    >
+      Login
+    </button>
+  </form>
+  <br />
+  <form action="{% url 'signup' %}" method="get">
+    <button
+      type="submit"
+      style="
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+      "
+    >
+      Don't have an account yet 😔
+    </button>
+  </form>
+  <br />
+  <form action="{% url 'password_reset' %}" method="get">
+    <button
+      type="submit"
+      style="
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+      "
+    >
+      Forgot Password?
+    </button>
+  </form>
+</div>
+{% endblock %}

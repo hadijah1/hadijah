@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    View Immunization Schedule
+{% endblock %}
+
+{% block content %}
+    <div style="background-image: linear-gradient(to bottom, #98FB98, #90EE90); padding: 20px; border-radius: 10px;">
+        <h1 style="text-align: center; color: #333;">View Immunization Schedule</h1>
+        
+        <!-- Search Form -->
+        <form action="{% url 'view_schedule' %}" method="GET" style="text-align: center; margin-bottom: 20px;">
+            <input type="text" name="search" placeholder="Search by Child Name" style="padding: 10px;">
+            <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">Search</button>
+        </form>
+
+        {% if immunization_schedule %}
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #4CAF50; color: white;">
+                        <th style="padding: 10px;">Child Name</th>
+                        <th style="padding: 10px;">Child Image</th>
+                        <th style="padding: 10px;">Vaccine Name</th>
+                        <th style="padding: 10px;">Recommended Age</th>
+                        <th style="padding: 10px;">Number of Doses</th>
+                        <th style="padding: 10px;">Additional Info</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for schedule_item in immunization_schedule %}
+                        <tr style="color: rgb(77, 13, 43);">
+                            <td style="padding: 10px;">{{ schedule_item.child_name }}</td>
+                            <td style="padding: 10px;">
+                                {% if schedule_item.child_image %}
+                                    <img src="{{ schedule_item.child_image.url }}" alt="{{ schedule_item.child_name }} Image" style="max-width: 100px; max-height: 100px;">
+                                {% else %}
+                                    No Image Available
+                                {% endif %}
+                            </td>
+                            <td style="padding: 10px;">{{ schedule_item.vaccine_name }}</td>
+                            <td style="padding: 10px;">{{ schedule_item.recommended_age }}</td>
+                            <td style="padding: 10px;">{{ schedule_item.number_of_doses }}</td>
+                            <td style="padding: 10px;">{{ schedule_item.additional_info }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p style="text-align: center;">No immunization schedule available.</p>
+        {% endif %}
+
+        <div style="text-align: center; margin-top: 20px;">
+            <form method="get" action="{% url 'immunization_schedule' %}">
+                <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">New Child Schedule</button>
+            </form>
+            <br />
+            <form method="get" action="{% url 'home' %}">
+                <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Back to Dashboard</button>
+            </form>
+            <br>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Logout</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

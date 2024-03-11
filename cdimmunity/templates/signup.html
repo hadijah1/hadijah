@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block title %} Signup - My Website {% endblock %}
+{% block content %}
+<div class="form-container">
+  <h2>Signup</h2>
+  <form
+    method="post"
+    enctype="multipart/form-data"
+    style="
+      background-color: rgba(0, 123, 255, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    "
+  >
+    {% csrf_token %}
+    <div style="margin-bottom: 10px">
+      {{ form.email.label_tag }}<br />
+      {{ form.email }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.username.label_tag }}<br />
+      {{ form.username }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.password1.label_tag }}<br />
+      {{ form.password1 }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.password2.label_tag }}<br />
+      {{ form.password2 }}
+    </div>
+    <div style="margin-bottom: 10px">
+      {{ form.profile_picture.label_tag }}<br />
+      {{ form.profile_picture }}
+    </div>
+    <button
+      type="submit"
+      style="
+        background-color: #fff;
+        color: #007bff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+      "
+    >
+      Signup
+    </button>
+  </form>
+  <br />
+  <form action="{% url 'login' %}" method="get">
+    <button
+      type="submit"
+      style="
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+      "
+    >
+      I have an account
+    </button>
+  </form>
+</div>
+{% endblock %}

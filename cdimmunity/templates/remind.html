@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Reminder Settings
+{% endblock %}
+
+{% block content %}
+    <div style="background-image: linear-gradient(to bottom, #87CEFA, #ADD8E6); padding: 20px; border-radius: 10px;">
+        <h1 style="text-align: center; color: #fff;">Reminder Settings</h1>
+        
+        <!-- Reminder Settings Form -->
+        <form method="post" style="background-color: rgba(0, 123, 255, 0.5); padding: 20px; border-radius: 10px; text-align: center;">
+            {% csrf_token %}
+            {{ form.email_reminder.label_tag }}<br>
+            {{ form.email_reminder }}<br><br>
+            {{ form.sms_reminder.label_tag }}<br>
+            {{ form.sms_reminder }}<br><br>
+            <label for="id_event_date" style="color: #fff;">Event Date:</label>
+            <input type="date" id="id_event_date" name="event_date" value="{{ form.instance.event_date|date:'Y-m-d' }}" style="padding: 5px; border-radius: 5px; margin-bottom: 10px;"><br>
+            <button type="submit" style="background-color: #3b5998; color: #fff; padding: 10px 20px; border: none; border-radius: 5px;">Update</button>
+        </form>
+
+        <br>
+        <form method="get" action="{% url 'home' %}">
+            <button type="submit" class="btn btn-primary" style="background-color: #3b5998; color: #fff; padding: 10px 20px; border: none; border-radius: 5px;">Back to Dashboard</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Reminder Settings Updated
+{% endblock %}
+
+{% block content %}
+    <p>Dear {{ user.username }},</p>
+    
+    <p>Your reminder settings have been successfully updated.</p>
+    
+    <!-- Display event date -->
+    {% if event_date %}
+    <p>Event Date: {{ event_date }}</p>
+    {% endif %}
+    
+    <p>You can review your settings by visiting the following link:</p>
+    <p><a href="http://127.0.0.1:8000/remind/">{{ settings_url }}</a></p>
+    
+    <p>Thank you for using our service.</p>
+    
+    <p>Sincerely,<br>
+        Heath cures.</p>
+{% endblock %}

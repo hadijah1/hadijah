@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - My Website{% endblock %}
+
+{% block content %}
+<h1>     reminder settings succesfully Updated</h1>
+    <H2>An email has been sent to your inbox, remember to <br>
+        check your mail to suit your reminders for the child, Thank you</H2></p>
+<br>
+<form method="get" action="{% url 'home' %}">
+    <button type="submit" class="btn btn-primary">dashboard</button>
+  </form><br>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Logout</button>
+{% endblock %}
